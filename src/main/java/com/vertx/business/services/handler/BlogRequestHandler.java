@@ -39,11 +39,13 @@ public class BlogRequestHandler {
         vertx.eventBus().request(Constants.BLOG_VERTICLE_ADDRESS.getValue(),jsonObject, result -> {
             JsonObject output;
             if(result.succeeded()) {
+                logger.info("Successfully read the Blog");
                 output = (JsonObject) result.result().body();
                 output.getString("_id");
                 output.getString(Constants.MESSAGE.getValue());
                 context.response().setStatusCode(201).send(output.toString());
             } else {
+                logger.info("Error in reading the Blog");
                 output = new JsonObject();
                 output.put(Constants.MESSAGE.getValue(), Constants.FAILED_DOC.getValue());
                 output.getString(Constants.MESSAGE.getValue());
@@ -69,16 +71,12 @@ public class BlogRequestHandler {
                         jsonObject.put("comments", new JsonArray());
 
                         vertx.eventBus().request(Constants.BLOG_VERTICLE_ADDRESS.getValue(),jsonObject, result -> {
-                            JsonObject output;
                             if(result.succeeded()) {
-                                output = (JsonObject) result.result().body();
-                                output.getString(Constants.MESSAGE.getValue());
-                                context.response().setStatusCode(201).send(output.toString());
+                                logger.info("Successfully insert the Blog");
+                                context.response().setStatusCode(201).send("success");
                             } else {
-                                output = new JsonObject();
-                                output.put(Constants.MESSAGE.getValue(), Constants.FAILED_DOC.getValue());
-                                output.getString(Constants.MESSAGE.getValue());
-                                context.response().setStatusCode(500).send(output.toString());
+                                logger.error("Failed to insert the Blog");
+                                context.response().setStatusCode(500).send("failure");
                             }
                         });
                     })

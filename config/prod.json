@@ -1,5 +1,5 @@
 {
-  "port": 8080,
+  "port": 8081,
   "mongoUrl": "mongodb://localhost:27017",
   "db_name": "userBlog",
   "username": "root",
@@ -8,7 +8,7 @@
   "blogCollectionName": "blog",
   "commentCollectionName": "comment",
   "jwtType": "jceks",
-  "jwtKeyPath": "/Users/vatsa/assignment/assignment-business-services/keystore.jceks",
+  "jwtKeyPath": "/Users/vatsa/assignment/blog-business-services/keystore.jceks",
   "jwtSecret": "secret",
   "salt": "secret",
   "hashAlgo": "sha512",

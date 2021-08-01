@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "d80ea9bb-d8c3-48ab-9806-9762bce6e62d",
+		"name": "BlogService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateBlog",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMS52YXRzYUBnbWFpbC5jb20iLCJpYXQiOjE2Mjc2NzMwMzd9.P6nDdq2ajT2NeLZfRxauBi_A2mwOU0bEgpvh0B8Io-E",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"blogId\": \"test1234\",\n    \"blogTitle\": \"Test\",\n    \"content\": \"This is first blog\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/v1/blog/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"v1",
+						"blog",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReadBlog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"blogId\": \"test1234\",\n    \"blogTitle\": \"Test\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/v1/blog/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"v1",
+						"blog",
+						"read"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateComment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMS52YXRzYUBnbWFpbC5jb20iLCJpYXQiOjE2Mjc2NzMwMzd9.P6nDdq2ajT2NeLZfRxauBi_A2mwOU0bEgpvh0B8Io-E",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"blogId\": \"test1234\",\n    \"blogTitle\": \"Test\",\n    \"comment\": {\n        \"description\": \"first comment\",\n        \"language\": \"us\"\n    }\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/v1/comment/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"v1",
+						"comment",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

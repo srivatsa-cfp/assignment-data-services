@@ -29,7 +29,7 @@ public class CommentBlogRequestHandler {
      * This methods intitalizes the vertx instance for the router and creates a router object to
      * handle the Post request. Each router has the associate handler to fulfill the request and
      * failure handler to handle any failures in fulfilling the request.
-     * @param Vertx instance.
+     *
      */
     public Router getRouter(Vertx vertx) throws Exception {
         this.vertx = vertx;
@@ -71,7 +71,10 @@ public class CommentBlogRequestHandler {
                                             JsonObject data = output.getJsonArray("data").getJsonObject(0);
 
                                             JsonArray comments = data.getJsonArray("comments");
+                                            if(user.get("sub") == null)
+                                                context.response().setStatusCode(500).send("Invalid User");
                                             comment.put("userId", user.get("sub"));
+
                                             comment.put("createdAt", System.currentTimeMillis());
                                             comments.add(comment);
                                             data.put("_id", blogId);
@@ -82,11 +85,13 @@ public class CommentBlogRequestHandler {
                                                     , data, res -> {
                                                         JsonObject resp;
                                                         if (res.succeeded()) {
+                                                            logger.info("Successfully created the comment");
                                                             resp = (JsonObject) res.result().body();
                                                             resp.getString("_id");
                                                             resp.getString("message");
                                                             context.response().setStatusCode(201).send(resp.toString());
                                                         } else {
+                                                            logger.info("Failed to insert the comment");
                                                             resp = new JsonObject();
                                                             resp.put("message", "Failed to insert the comment");
                                                             resp.getString("message");
