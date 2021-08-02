@@ -1,0 +1,86 @@
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: Blog Server
+host: localhost:9090
+basePath: /v1/blog
+schemes:
+  - http
+paths:
+  /create:
+    post:
+      tags:
+        - blog
+      summary: Create a Blog
+      operationId: create
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: newBlog
+          schema:
+            $ref: "#/definitions/BlogRequest"
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid input
+
+  /read?blogId={bottle_id}:
+    get:
+      tags:
+        - bottles
+      summary: Retrieve a blog
+      operationId: read
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: blogId
+          required: true
+          type: string
+          format: int64
+      responses:
+        default:
+          description: Success
+          schema:
+            $ref: "#/definitions/BlogResponse"
+        '404':
+          description: Not Found
+definitions:
+  BlogRequest:
+    type: object
+    properties:
+      blogId:
+        type: string
+      blogTitle:
+        type: string
+      content:
+        type: string
+  BlogResponse:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          blogId:
+            type: string
+          blogTitle:
+            type: string
+          content:
+            type: string
+          userId:
+            type: string
+          comments:
+            type: array
+            items:
+              description:
+                type: string
+              language:
+                type: string
+              userId:
+                type: string
+              createdAt:
+                type: string

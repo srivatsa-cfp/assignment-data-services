@@ -1,0 +1,42 @@
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: Blog Comment Server
+host: localhost:9090
+basePath: /v1/comment
+schemes:
+  - http
+paths:
+  /create:
+    post:
+      tags:
+        - blog
+      summary: Create a Blog Comment
+      operationId: create
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: newComment
+          schema:
+            $ref: "#/definitions/CommentRequest"
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid input
+definitions:
+  CommentRequest:
+    type: object
+    properties:
+      blogId:
+        type: string
+      comments:
+        type: object
+        properties:
+          description:
+            type: string
+          language:
+            type: string

@@ -31,7 +31,7 @@ public class CommentBlogRequestHandler {
      * failure handler to handle any failures in fulfilling the request.
      *
      */
-    public Router getRouter(Vertx vertx) throws Exception {
+    public Router getRouter(Vertx vertx) {
         this.vertx = vertx;
         Router router = Router.router(vertx);
         router.route().handler(BodyHandler.create());

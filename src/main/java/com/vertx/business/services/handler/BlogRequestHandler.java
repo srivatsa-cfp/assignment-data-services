@@ -26,14 +26,20 @@ public class BlogRequestHandler {
                 .handler(this::createBlogHandler)
                 .failureHandler(this::failurHandler);
 
-        router.post("/"+Constants.READ.getValue())
+        router.get("/"+Constants.READ.getValue())
                 .handler(this::readBlogHandler)
                 .failureHandler(this::failurHandler);
         return router;
     }
 
     public void readBlogHandler(RoutingContext context) {
-        JsonObject jsonObject = context.getBodyAsJson();
+
+        String blogId = context.request().params().get("blogId");
+        logger.info("blogId"+ blogId);
+        logger.info("blogId"+ context.request().params().get("blogId"));
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.put("blogId", blogId);
         jsonObject.put(Constants.OPERATION.getValue(), Constants.READ.getValue());
 
         vertx.eventBus().request(Constants.BLOG_VERTICLE_ADDRESS.getValue(),jsonObject, result -> {

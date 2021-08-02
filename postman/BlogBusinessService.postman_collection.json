@@ -43,8 +43,11 @@
 		},
 		{
 			"name": "ReadBlog",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -56,7 +59,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9090/v1/blog/read",
+					"raw": "http://localhost:9090/v1/blog/read?blogId=d36390fa-a829-4bd1-825c-d0b3d74f996d",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -66,6 +69,12 @@
 						"v1",
 						"blog",
 						"read"
+					],
+					"query": [
+						{
+							"key": "blogId",
+							"value": "d36390fa-a829-4bd1-825c-d0b3d74f996d"
+						}
 					]
 				}
 			},

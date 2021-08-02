@@ -46,12 +46,20 @@ public class MainVerticle extends AbstractVerticle {
 
                     // Create a router object.
                     Router router = Router.router(vertx);
+                    router.route().handler(io.vertx.ext.web.handler.CorsHandler.create(".*.")
+                            .allowedMethod(io.vertx.core.http.HttpMethod.POST)
+                            .allowedMethod(io.vertx.core.http.HttpMethod.OPTIONS)
+                            .allowedMethod(io.vertx.core.http.HttpMethod.GET)
+                            .allowCredentials(true)
+                            .allowedHeader("Access-Control-Allow-Method")
+                            .allowedHeader("Access-Control-Allow-Origin")
+                            .allowedHeader("Access-Control-Allow-Credentials")
+                            .allowedHeader("Authorization")
+                            .allowedHeader("Access-Control-Allow-Headers")
+                            .allowedHeader("Content-Type"));
                     router.mountSubRouter("/v1/blog", new BlogRequestHandler().getRouter(vertx));
-                    try {
-                        router.mountSubRouter("/v1/comment", new CommentBlogRequestHandler().getRouter(vertx));
-                    } catch (Exception e) {
-                        logger.error("Failed to create the comment router " + e.getMessage());
-                    }
+                    router.mountSubRouter("/v1/comment", new CommentBlogRequestHandler().getRouter(vertx));
+
 
                     // Create the HTTP server and pass the "accept" method to the request handler.
                     int port = config.getInteger("port");
