@@ -2,6 +2,7 @@ package com.vertx.business.services.test;
 
 import com.vertx.business.services.config.ConfigObject;
 
+import com.vertx.business.services.workers.BlogVerticle;
 import io.vertx.core.Vertx;
 
 
@@ -58,7 +59,7 @@ public class MainVerticleTest {
 
     @BeforeEach
     void deploy_verticle(Vertx vertx, VertxTestContext testContext) {
-        vertx.deployVerticle(new UserVerticle(), testContext.succeedingThenComplete());
+        vertx.deployVerticle(new BlogVerticle(), testContext.succeedingThenComplete());
         testContext.completeNow();
     }
 }
